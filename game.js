@@ -8,29 +8,54 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {    
 
-    playerInput = prompt("What's your pick? Rock, Paper, or Scissors")
-    firstLetter = playerInput.charAt(0).toUpperCase()
-    otherLetters = playerInput.slice(1).toLowerCase()
+    firstLetter = playerSelection.charAt(0).toUpperCase()
+    otherLetters = playerSelection.slice(1).toLowerCase()
 
     playerSelection = firstLetter + otherLetters
 
     computerSelection = getComputerChoice()
 
-    let gameResult
-
-    console.log(computerSelection)
-
-    if (playerSelection === 'Rock' && computerSelection === "Paper") {
-        gameResult = "You lost! Paper beats rock."
-    } else if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
-        gameResult = "You won! Rock beats scissors."
-    } else if (playerSelection === 'Rock' && computerSelection === 'Rock') {
-        gameResult = "It's a draw."
-    }
-    
-    return gameResult
+    if (playerSelection === computerSelection) {
+        return "It's a draw."
+    } else if (playerSelection === 'Rock' && computerSelection === 'Scissors' || 
+                playerSelection === 'Scissors' && computerSelection === 'Paper' || 
+                playerSelection === 'Paper' && computerSelection === 'Rock') {
+            return `You won! ${playerSelection} beats ${computerSelection}`
+     } else {
+        return `You lost! ${computerSelection} beats ${playerSelection}`
+     }
+            
 }
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+
+    let userScore = 0
+    let computerScore = 0
+
+    
+
+    for (let i = 0; i < 5; i++) {
+        const playerSelection = prompt("Rock, paper, or scissors?")
+        const computerSelection = getComputerChoice()
+        const result = playRound(playerSelection, computerSelection)
+
+        console.log(result)
+        
+        if(result.includes("won")) {
+            userScore++
+        } else if(result.includes("lost")) {
+            computerScore++
+        }
+    }
+
+    if (userScore > computerScore) {
+        console.log(`You won by a score of ${userScore} to ${computerScore}`)
+    } else if (computerScore > userScore) {
+        console.log(`You lost by a score of ${computerScore} to ${userScore}`)
+    } else if (computerScore === userScore) {
+        console.log("It's a draw!")
+    }
+}
+
+game()
+ 
