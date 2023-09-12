@@ -1,3 +1,10 @@
+let gameState = {
+    userScore: 0,
+    computerScore: 0,
+    winningScore: 3,
+    inProgress: true
+}
+
 
 function getComputerChoice() {
     let choices = ['Rock', 'Paper', 'Scissors']
@@ -25,63 +32,68 @@ function playRound(playerSelection, computerSelection) {
             
 }
 
-function game() {
+function handleButtonClick(choice) {
+    if (!gameState.inProgress) return
+    
+    const playerSelection = choice
+    const computerSelection = getComputerChoice()
+    const result = playRound(playerSelection, computerSelection)
 
-    let userScore = 0
-    let computerScore = 0
-
-    const rockButton = document.getElementById("Rock")
-    const paperButton = document.getElementById("Paper")
-    const scissorsButton = document.getElementById("Scissors")
-
- 
-
-    rockButton.addEventListener("click", function() {
-        let playerSelection = "rock"
-        let computerSelection = getComputerChoice()
-        const result = playRound(playerSelection, computerSelection)
-
-        if(result.includes("won")) {
-            userScore++
-        } else if(result.includes("lost")) {
-            computerScore++
-        }
-        document.getElementById("rounds").innerHTML = result
-    })
-
-    paperButton.addEventListener("click", function() {
-        let playerSelection = "paper"
-        let computerSelection = getComputerChoice()
-        const result = playRound(playerSelection, computerSelection)
-
-        if(result.includes("won")) {
-            userScore++
-        } else if(result.includes("lost")) {
-            computerScore++
-        }
-        
-    })
-
-    scissorsButton.addEventListener("click", function() {
-        let playerSelection = "scissors"
-        let computerSelection = getComputerChoice()
-        const result = playRound(playerSelection, computerSelection)
-
-        if(result.includes("won")) {
-            userScore++
-        } else if(result.includes("lost")) {
-            computerScore++
-        }
-    })
-
-    if (userScore > computerScore) {
-        console.log(`You won by a score of ${userScore} to ${computerScore}`)
-    } else if (computerScore > userScore) {
-        console.log(`You lost by a score of ${computerScore} to ${userScore}`)
-    } else if (computerScore === userScore) {
-        console.log("It's a draw!")
+    if (result.includes("won")) {
+        gameState.userScore++
+        document.getElementById("score").innerHTML = `Score: You: ${gameState.userScore} Computer ${gameState.computerScore}`
+    } else if (result.includes("lost")) {
+        gameState.computerScore++
+        document.getElementById("score").innerHTML = `Score: You: ${gameState.userScore} Computer ${gameState.computerScore}`
     }
-  }
+
+    document.getElementById("rounds").innerHTML = result
+
+    if (gameState.userScore === gameState.winningScore || gameState.computerScore === gameState.winningScore) {
+        endGame()
+    } 
+    
+}
+
+function endGame() {
+    gameState.inProgress = false;
+
+    if (gameState.userScore > gameState.computerScore) {
+        document.getElementById("finalscore").innerHTML = (`You won by a score of ${gameState.userScore} to ${gameState.computerScore}`)
+    } else if (gameState.computerScore > gameState.userScore) {
+        document.getElementById("finalscore").innerHTML = (`You lost by a score of ${gameState.computerScore} to ${gameState.userScore}`)
+    } else {
+        document.getElementById("finalscore").innerHTML = ("It's a draw!")
+    }
+
+    document.getElementById("startGameButton").style.display = 'block'
+}
+
+function game() {
+    const choices = ['Rock', 'Paper', 'Scissors']
+
+
+    choices.forEach(function(choice) {
+        document.getElementById(choice).addEventListener('click', function() {
+            handleButtonClick(this.id)
+        })
+    })
+} 
+
+function resetGame() {
+    gameState.userScore = 0
+    gameState.computerScore = 0
+    gameState.inProgress = true
+
+    document.getElementById("finalscore").innerHTML = ''
+    document.getElementById("score") = ''
+}
+
+document.getElementById("startGameButton").addEventListener('click', function() {
+    resetGame()
+
+    this.style.display = none
+})
 
 
 game()
