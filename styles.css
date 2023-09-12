@@ -1,0 +1,19 @@
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+}
+
+.gamebutton {
+    color: red;
+}
+
+.score-container {
+    display: flex;
+    justify-content: center;
+}
