@@ -1,19 +1,88 @@
-.button-container {
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.center-wrapper {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    height: 100%;
     gap: 16px;
 }
 
-.title-container {
+.title {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #555;
+    border-bottom: 3px solid #f66;
+    padding-bottom: 5px;
+}
+
+#score-container {
     display: flex;
     justify-content: center;
+    gap: 20px;
+    font-size: 1.5em;
+    margin-top: 20px;
 }
+
+#your-score, #computer-score {
+    font-weight: bold;
+}
+
+#your-score span, #computer-score span {
+    color: #f06; 
+}
+
+#startGameButton {
+    display: none;
+    color: white;
+    background-color: #E74C3C;
+    border: none;
+    padding: 15px 30px;  /* Reduced the padding */
+    font-size: 1.8em;   /* Reduced the font size a bit */
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    animation: pulsate 1.5s infinite;
+}
+
+#startGameButton:hover {
+    background-color: #C0392B;
+}
+
+#startGameButton:active {
+    background-color: #A93226;
+}
+
+@keyframes pulsate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
 
 .gamebutton {
-    color: red;
+    color: red;  /* Restoring your color choice */
+    background-color: #2C3E50;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    outline: none;
 }
 
-.score-container {
-    display: flex;
-    justify-content: center;
+.gamebutton:hover {
+    background-color: #34495E;
+    transform: scale(1.05);
+}
+
+.gamebutton:active {
+    background-color: #22313F;
+    transform: scale(0.95);
 }

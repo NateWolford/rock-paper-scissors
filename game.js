@@ -41,10 +41,10 @@ function handleButtonClick(choice) {
 
     if (result.includes("won")) {
         gameState.userScore++
-        document.getElementById("score").innerHTML = `Score: You: ${gameState.userScore} Computer ${gameState.computerScore}`
+        document.querySelector("#your-score span").innerHTML = gameState.userScore
     } else if (result.includes("lost")) {
         gameState.computerScore++
-        document.getElementById("score").innerHTML = `Score: You: ${gameState.userScore} Computer ${gameState.computerScore}`
+        document.querySelector("#computer-score span").innerHTML = gameState.computerScore
     }
 
     document.getElementById("rounds").innerHTML = result
@@ -86,8 +86,9 @@ function resetGame() {
     gameState.inProgress = true
 
     document.getElementById("finalscore").innerHTML = ''
-    document.getElementById("score").innerHTML = 'Score: You: 0 Computer: 0'
     document.getElementById("rounds").innerHTML = ''
+    document.querySelector("#your-score span").innerHTML = gameState.userScore
+    document.querySelector("#computer-score span").innerHTML = gameState.computerScore
 }
 
 document.getElementById("startGameButton").addEventListener('click', function() {
