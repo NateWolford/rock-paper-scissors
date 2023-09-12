@@ -25,9 +25,9 @@ function playRound(playerSelection, computerSelection) {
     } else if (playerSelection === 'Rock' && computerSelection === 'Scissors' || 
                 playerSelection === 'Scissors' && computerSelection === 'Paper' || 
                 playerSelection === 'Paper' && computerSelection === 'Rock') {
-            return `You won! ${playerSelection} beats ${computerSelection}`
+            return `You get a point! ${playerSelection} beats ${computerSelection}`
      } else {
-        return `You lost! ${computerSelection} beats ${playerSelection}`
+        return `You did not get a point. ${computerSelection} beats ${playerSelection}`
      }
             
 }
@@ -85,14 +85,15 @@ function resetGame() {
     gameState.computerScore = 0
     gameState.inProgress = true
 
-    document.getElementById("finalscore").innerHTML = ''
-    document.getElementById("score") = ''
+    // document.getElementById("finalscore").innerHTML = ''
+    // document.getElementById("score").innerHTML = ''
+    // document.getElementById("rounds").innerHTML = ''
 }
 
 document.getElementById("startGameButton").addEventListener('click', function() {
     resetGame()
 
-    this.style.display = none
+    this.style.display = 'none'
 })
 
 
